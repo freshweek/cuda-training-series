@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "name": "CUDA",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/home/wenjie/miniconda3/envs/cuda/include",
+            ],
+            "defines": [],
+            // "compilerPath": "/usr/bin/gcc",
+            "compilerPath": "/usr/local/cuda/bin/nvcc",
+            "cStandard": "c17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ],
+    "version": 4
+}
