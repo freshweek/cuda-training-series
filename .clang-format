@@ -1,0 +1,38 @@
+---
+BasedOnStyle: llvm
+BreakBeforeBraces: Custom
+BraceWrapping:
+    AfterClass: true
+    AfterControlStatement: true
+    AfterEnum: true
+    AfterFunction: true
+    AfterNamespace: false
+    AfterStruct: true
+    AfterUnion: true
+    BeforeCatch: true
+    BeforeElse: true
+    IndentBraces: false
+Language: Cpp
+AlignAfterOpenBracket: Align
+AlignEscapedNewlinesLeft: true
+AlignOperands: true
+AlignTrailingComments: true
+BinPackArguments: false
+BinPackParameters: false
+ColumnLimit: 80
+ContinuationIndentWidth: 4
+IndentWrappedFunctionNames: false
+KeepEmptyLinesAtTheStartOfBlocks: false
+MaxEmptyLinesToKeep: 2
+IndentWidth: 4
+ReflowComments: true
+SpaceBeforeAssignmentOperators: true
+SpacesInAngles: false
+SpacesBeforeTrailingComments: 4
+Standard: Auto
+UseTab: Never
+AlwaysBreakTemplateDeclarations: true
+DerivePointerAlignment: true
+PointerAlignment: Left
+#
+---
