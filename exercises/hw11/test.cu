@@ -1,18 +1,21 @@
 #ifndef NO_MPI
 #include <mpi.h>
 #endif
-#include <cstdio>
 #include <chrono>
+#include <cstdio>
 #include <iostream>
 
-__global__ void kernel (double* x, int N) {
+__global__ void kernel(double* x, int N)
+{
     int i = threadIdx.x + blockIdx.x * blockDim.x;
-    if (i < N) {
+    if (i < N)
+    {
         x[i] = 2 * x[i];
     }
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
 #ifndef NO_MPI
     int rank, num_ranks;
 
@@ -24,14 +27,16 @@ int main(int argc, char** argv) {
     // Total problem size
     size_t N = 1024 * 1024 * 1024;
 
-    if (argc >= 2) {
+    if (argc >= 2)
+    {
         N = atoi(argv[1]);
     }
 
 #ifdef NO_MPI
     // If not using MPI, specify at command line how many "ranks" there are
     int num_ranks = 1;
-    if (argc >= 3) {
+    if (argc >= 3)
+    {
         num_ranks = atoi(argv[2]);
     }
 #endif
@@ -40,7 +45,7 @@ int main(int argc, char** argv) {
     size_t N_per_rank = N / num_ranks;
 
     double* x;
-    cudaMalloc((void**) &x, N_per_rank * sizeof(double));
+    cudaMalloc((void**)&x, N_per_rank * sizeof(double));
 
     // Number of repetitions
 
@@ -53,7 +58,8 @@ int main(int argc, char** argv) {
     int threads_per_block = 256;
     size_t blocks = (N_per_rank + threads_per_block - 1) / threads_per_block;
 
-    for (int i = 0; i < num_reps; ++i) {
+    for (int i = 0; i < num_reps; ++i)
+    {
         kernel<<<blocks, threads_per_block>>>(x, N_per_rank);
         cudaDeviceSynchronize();
     }
@@ -62,7 +68,8 @@ int main(int argc, char** argv) {
 
     auto duration = duration_cast<milliseconds>(end - start);
 
-    std::cout << "Time per kernel = " << duration.count() / (double) num_reps << " ms " << std::endl;
+    std::cout << "Time per kernel = " << duration.count() / (double)num_reps
+              << " ms " << std::endl;
 
 #ifndef NO_MPI
     MPI_Finalize();
